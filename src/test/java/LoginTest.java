@@ -1,9 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
-
 import static org.testng.Assert.*;
-
 public class LoginTest extends BaseTest {
 
     @Test
