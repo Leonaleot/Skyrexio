@@ -10,7 +10,6 @@ public class LoginPage {
     private final By submitButton = By.cssSelector("[data-test='login-button']");
     private final By errorMsg = By.xpath("//*[@data-test='error']");
 
-
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -24,8 +23,12 @@ public class LoginPage {
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(submitButton).click();
     }
-public boolean isErrorMsgDisplayed() {
-    return driver.findElement(errorMsg).isDisplayed();
-}
 
+    public boolean isErrorMsgDisplayed() {
+        return driver.findElement(errorMsg).isDisplayed();
+    }
+
+    public String getErrorMsgValid() {
+        return driver.findElement(errorMsg).getText();
+    }
 }

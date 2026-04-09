@@ -10,9 +10,8 @@ public class ProductsPage {
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
     }
-public String getTitle() {
-    return driver.findElement(pageTitle).getText();
 
-}
-
+    public String getTitle() {
+        return driver.findElement(pageTitle).getText();
+    }
 }
