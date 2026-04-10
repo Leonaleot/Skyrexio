@@ -7,6 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
 import pages.ProductsPage;
+
 import java.time.Duration;
 
 public class BaseTest {
@@ -18,7 +19,7 @@ public class BaseTest {
     public void setup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized"); //Раскрыть браузер на весь экран
-        options.addArguments("headless");        // Браузер запускается без графического интерфейса
+        //options.addArguments("headless");        // Браузер запускается без графического интерфейса
         options.addArguments("guest");           // Гостевой режим
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); //Ожидание 10с, если элемент не найден
@@ -29,6 +30,6 @@ public class BaseTest {
 
     @AfterMethod
     public void close() {
-        driver.quit();
+        //driver.quit();
     }
 }
