@@ -9,9 +9,14 @@ public class ProductsPage extends BasePage {
     private final By cartLink = By.cssSelector("[data-test='shopping-cart-link']");
     private final By cartBadge = By.cssSelector("[data-test='shopping-cart-badge']");
     private final By addtoCartBtn = By.xpath("//*[text()='Add to cart']");
+    private final By removeCartBtn = By.xpath("//*[text()='Remove']");
 
     public ProductsPage(WebDriver driver) {
         super(driver);
+    }
+
+    public boolean pageTitleDisplayed() {
+        return driver.findElement(pageTitle).isDisplayed();
     }
 
     public String getTitle() {
@@ -19,11 +24,15 @@ public class ProductsPage extends BasePage {
     }
 
     public void addToCart() {
-        driver.findElements(addtoCartBtn).get(2).click();
+        driver.findElements(addtoCartBtn).get(0).click();
     }
 
-    public boolean pageTitleDisplayed() {
-        return driver.findElement(pageTitle).isDisplayed();
+    public String checkRemoveBtnBorder() {
+        return driver.findElement(removeCartBtn).getCssValue("border");
+    }
+
+    public String checkRemoveBtn() {
+        return driver.findElement(removeCartBtn).getText();
     }
 
     public String checkCounterValue() {

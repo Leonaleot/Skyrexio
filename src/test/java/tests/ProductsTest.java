@@ -12,9 +12,9 @@ public class ProductsTest extends BaseTest {
         loginPage.login("standard_user", "secret_sauce");
         assertTrue(productsPage.pageTitleDisplayed());
         productsPage.addToCart();
+        assertEquals(productsPage.checkRemoveBtn(), "Remove");
+        assertEquals(productsPage.checkRemoveBtnBorder(), "1px solid rgb(226, 35, 26)");
         assertEquals(productsPage.checkCounterValue(), "1");
         assertEquals(productsPage.checkCounterColor(), "rgba(226, 35, 26, 1)");
-        productsPage.openCart();
-        assertEquals(cartPage.getTitle(), "Your Cart");
     }
 }

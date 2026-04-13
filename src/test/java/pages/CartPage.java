@@ -10,6 +10,10 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
+    public boolean pageTitleDisplayed() {
+        return driver.findElement(pageTitle).isDisplayed();
+    }
+
     public String getTitle() {
         return driver.findElement(pageTitle).getText();
     }
