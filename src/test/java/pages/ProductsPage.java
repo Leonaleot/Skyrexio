@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class ProductsPage extends BasePage {
 
     private final By pageTitle = By.cssSelector("[data-test='title']");
-    private final By cartLink = By.cssSelector("[data-test='shoping-cart-link']");
+    private final By cartLink = By.cssSelector("[data-test='shopping-cart-link']");
     private final By cartBadge = By.cssSelector("[data-test='shopping-cart-badge']");
     private final By addtoCartBtn = By.xpath("//*[text()='Add to cart']");
 
@@ -32,5 +32,9 @@ public class ProductsPage extends BasePage {
 
     public String checkCounterColor() {
         return driver.findElement(cartBadge).getCssValue("background-color");
+    }
+
+    public void openCart() {
+        driver.findElement(cartLink).click();
     }
 }

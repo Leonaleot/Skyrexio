@@ -14,5 +14,7 @@ public class ProductsTest extends BaseTest {
         productsPage.addToCart();
         assertEquals(productsPage.checkCounterValue(), "1");
         assertEquals(productsPage.checkCounterColor(), "rgba(226, 35, 26, 1)");
+        productsPage.openCart();
+        assertEquals(cartPage.getTitle(), "Your Cart");
     }
 }

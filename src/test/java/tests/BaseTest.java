@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductsPage;
 
@@ -14,22 +15,24 @@ public class BaseTest {
     public WebDriver driver;
     LoginPage loginPage;
     ProductsPage productsPage;
+    CartPage cartPage;
 
     @BeforeMethod
     public void setup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized"); //Раскрыть браузер на весь экран
-        //options.addArguments("headless");        // Браузер запускается без графического интерфейса
+        options.addArguments("headless");        // Браузер запускается без графического интерфейса
         options.addArguments("guest");           // Гостевой режим
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); //Ожидание 10с, если элемент не найден
 
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
+        cartPage = new CartPage(driver);
     }
 
     @AfterMethod
     public void close() {
-        //driver.quit();
+        driver.quit();
     }
 }
