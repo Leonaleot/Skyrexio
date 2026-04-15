@@ -4,12 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class ProductsPage extends BasePage {
-
-    private final By pageTitle = By.cssSelector("[data-test='title']");
-    private final By cartLink = By.cssSelector("[data-test='shopping-cart-link']");
-    private final By cartBadge = By.cssSelector("[data-test='shopping-cart-badge']");
-    private final By addtoCartBtn = By.xpath("//*[text()='Add to cart']");
+    public static final String ADD_TO_CART_PATTERN =
+            "//div[text()='%s']//ancestor::div[@class='inventory_item']" +
+                    "//child::button[text()='Add to cart']";
+    private final By pageTitle = By.cssSelector(DATA_TEST_PATTERN.formatted("title"));
+    private final By cartLink = By.cssSelector(DATA_TEST_PATTERN.formatted("shopping-cart-link"));
+    private final By cartBadge = By.cssSelector(DATA_TEST_PATTERN.formatted("shopping-cart-badge"));
+    private final By addToCartBtn = By.xpath("//*[text()='Add to cart']");
     private final By removeCartBtn = By.xpath("//*[text()='Remove']");
+
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -24,7 +27,13 @@ public class ProductsPage extends BasePage {
     }
 
     public void addToCart() {
-        driver.findElements(addtoCartBtn).get(0).click();
+        driver.findElements(addToCartBtn).get(0).click();
+    }
+
+    public void addToCart(final String goodsName) {
+        By addToCart = By.xpath(ADD_TO_CART_PATTERN.formatted(goodsName));
+
+        driver.findElement(addToCart).click();
     }
 
     public String checkRemoveBtnBorder() {
