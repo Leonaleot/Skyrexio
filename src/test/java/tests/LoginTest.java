@@ -1,6 +1,8 @@
 package tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import static org.testng.Assert.*;
 
 public class LoginTest extends BaseTest {
@@ -11,43 +13,23 @@ public class LoginTest extends BaseTest {
         assertEquals(productsPage.getTitle(), "Products");
     }
 
-    @Test
-    public void checkIncorrectLogin() {
+    @Test(dataProvider = "loginData")
+    public void checkIncorrectLogin(String user, String password, String errorMessage) {
         loginPage.open();
-        loginPage.login("locked_out_user", "secret_sauce");
+        loginPage.login(user, password);
         assertTrue(loginPage.isErrorMsgDisplayed(), "The error message fails to appear");
-        assertEquals(loginPage.getErrorMsgValid(), "Epic sadface: Sorry, this user has been locked out.");
+        assertEquals(loginPage.getErrorMsgValid(), errorMessage, "Error message doesn't correspond");
     }
 
-    @Test
-    public void checkWithoutLogin() {
-        loginPage.open();
-        loginPage.login("", "secret_sauce");
-        assertTrue(loginPage.isErrorMsgDisplayed(), "The error message fails to appear");
-        assertEquals(loginPage.getErrorMsgValid(), "Epic sadface: Username is required");
-    }
-
-    @Test
-    public void checkWithoutPassword() {
-        loginPage.open();
-        loginPage.login("standard_user", "");
-        assertTrue(loginPage.isErrorMsgDisplayed(), "The error message fails to appear");
-        assertEquals(loginPage.getErrorMsgValid(), "Epic sadface: Password is required");
-    }
-
-    @Test
-    public void checkWithoutLoginPassword() {
-        loginPage.open();
-        loginPage.login("", "");
-        assertTrue(loginPage.isErrorMsgDisplayed(), "The error message fails to appear");
-        assertEquals(loginPage.getErrorMsgValid(), "Epic sadface: Username is required");
-    }
-
-    @Test
-    public void checkIncorrectPassword() {
-        loginPage.open();
-        loginPage.login("locked_out_user", "secretsauce");
-        assertTrue(loginPage.isErrorMsgDisplayed(), "The error message fails to appear");
-        assertEquals(loginPage.getErrorMsgValid(), "Epic sadface: Username and password do not match any user in this service");
+    @DataProvider
+    public Object[][] loginData() {
+        return new Object[][]{
+                {"locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."},
+                {"", "secret_sauce", "Epic sadface: Username is required"},
+                {"standard_user", "", "Epic sadface: Password is required"},
+                {"", "", "Epic sadface: Username is required"},
+                {"locked_out_user", "secretsauce",
+                        "Epic sadface: Username and password do not match any user in this service"}
+        };
     }
 }
