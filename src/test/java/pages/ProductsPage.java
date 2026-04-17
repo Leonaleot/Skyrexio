@@ -13,7 +13,6 @@ public class ProductsPage extends BasePage {
     private final By addToCartBtn = By.xpath("//*[text()='Add to cart']");
     private final By removeCartBtn = By.xpath("//*[text()='Remove']");
 
-
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
