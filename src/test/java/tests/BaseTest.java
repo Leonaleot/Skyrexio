@@ -7,7 +7,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.CartPage;
 import pages.LoginPage;
-import pages.NavigationPanel;
 import pages.ProductsPage;
 
 import java.time.Duration;
@@ -17,7 +16,6 @@ public class BaseTest {
     LoginPage loginPage;
     ProductsPage productsPage;
     CartPage cartPage;
-    NavigationPanel navigationPanel;
 
     @BeforeMethod
     public void setup() {
@@ -31,7 +29,6 @@ public class BaseTest {
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
-        navigationPanel = new NavigationPanel(driver);
     }
 
     @AfterMethod
