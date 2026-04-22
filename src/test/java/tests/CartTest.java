@@ -12,7 +12,7 @@ public class CartTest extends BaseTest {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         assertTrue(cartPage.pageTitleDisplayed());
-        productsPage.openCart();
+        productsPage.navigationPanel.openCart();
         assertEquals(cartPage.getTitle(), "Your Cart");
     }
 
@@ -21,10 +21,10 @@ public class CartTest extends BaseTest {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         productsPage.addToCart(goodsName);
-        productsPage.openCart();
+        productsPage.navigationPanel.openCart();
 
-        assertFalse(cartPage.getProductNames().isEmpty());
         assertEquals(cartPage.getProductNames().size(), 1);
+        assertFalse(cartPage.getProductNames().isEmpty());
         assertTrue(cartPage.getProductNames().contains(goodsName));
     }
 }

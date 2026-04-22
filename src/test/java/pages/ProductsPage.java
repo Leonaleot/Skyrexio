@@ -8,8 +8,7 @@ public class ProductsPage extends BasePage {
             "//div[text()='%s']//ancestor::div[@class='inventory_item']" +
                     "//child::button[text()='Add to cart']";
     private final By pageTitle = By.cssSelector(DATA_TEST_PATTERN.formatted("title"));
-    private final By cartLink = By.cssSelector(DATA_TEST_PATTERN.formatted("shopping-cart-link"));
-    private final By cartBadge = By.cssSelector(DATA_TEST_PATTERN.formatted("shopping-cart-badge"));
+
     private final By addToCartBtn = By.xpath("//*[text()='Add to cart']");
     private final By removeCartBtn = By.xpath("//*[text()='Remove']");
 
@@ -41,17 +40,5 @@ public class ProductsPage extends BasePage {
 
     public String checkRemoveBtn() {
         return driver.findElement(removeCartBtn).getText();
-    }
-
-    public String checkCounterValue() {
-        return driver.findElement(cartBadge).getText();
-    }
-
-    public String checkCounterColor() {
-        return driver.findElement(cartBadge).getCssValue("background-color");
-    }
-
-    public void openCart() {
-        driver.findElement(cartLink).click();
     }
 }
