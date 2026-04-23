@@ -3,6 +3,7 @@ package tests;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
+import static user.UserFactory.withAdminPermission;
 
 public class CartTest extends BaseTest {
     final String goodsName = "Test.allTheThings() T-Shirt (Red)";
@@ -10,7 +11,7 @@ public class CartTest extends BaseTest {
     @Test
     public void checkCart() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(withAdminPermission());
         assertTrue(cartPage.pageTitleDisplayed());
         productsPage.navigationPanel.openCart();
         assertEquals(cartPage.getTitle(), "Your Cart");
@@ -19,7 +20,7 @@ public class CartTest extends BaseTest {
     @Test
     public void checkGoodsInCart() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(withAdminPermission());
         productsPage.addToCart(goodsName);
         productsPage.navigationPanel.openCart();
 
