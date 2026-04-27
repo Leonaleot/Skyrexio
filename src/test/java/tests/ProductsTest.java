@@ -28,7 +28,7 @@ public class ProductsTest extends BaseTest {
         }
 
         assertEquals(productsPage.checkRemoveBtn(), "Remove");
-        assertEquals(productsPage.checkRemoveBtnBorder(), "1px solid rgb(226, 35, 26)");
+        assertEquals(productsPage.checkRemoveBtnBorder(), "0.8px solid rgb(226, 35, 26)");
         assertEquals(productsPage.navigationPanel.checkCounterValue(), "6");
         assertEquals(productsPage.navigationPanel.checkCounterColor(), "rgba(226, 35, 26, 1)");
     }
