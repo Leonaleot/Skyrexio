@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import user.User;
@@ -8,6 +9,10 @@ import static org.testng.Assert.*;
 import static user.UserFactory.*;
 
 public class LoginTest extends BaseTest {
+    @Severity(SeverityLevel.BLOCKER)
+    @Owner("Khokhlova Tatiana @tataxox")
+    @TmsLink("Skyrexio")
+    @Issue("Skyrexio")
     @Test
     public void checkLogin() {
         loginPage.open();

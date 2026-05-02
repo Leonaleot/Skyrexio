@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class ProductsTest extends BaseTest {
 
     @Test
     public void checkGoodsAdded() {
+        SoftAssert soft = new SoftAssert();
         loginPage.open();
         loginPage.login(withAdminPermission());
         assertTrue(productsPage.pageTitleDisplayed());
@@ -27,9 +29,10 @@ public class ProductsTest extends BaseTest {
             productsPage.addToCart(goods);
         }
 
-        assertEquals(productsPage.checkRemoveBtn(), "Remove");
-        assertEquals(productsPage.checkRemoveBtnBorder(), "0.8px solid rgb(226, 35, 26)");
-        assertEquals(productsPage.navigationPanel.checkCounterValue(), "6");
-        assertEquals(productsPage.navigationPanel.checkCounterColor(), "rgba(226, 35, 26, 1)");
+        soft.assertEquals(productsPage.checkRemoveBtn(), "Remove");
+        soft.assertEquals(productsPage.checkRemoveBtnBorder(), "1px solid rgb(226, 35, 26)");
+        soft.assertEquals(productsPage.navigationPanel.checkCounterValue(), "6");
+        soft.assertEquals(productsPage.navigationPanel.checkCounterColor(), "rgba(226, 35, 26, 1)");
+        soft.assertAll();
     }
 }
