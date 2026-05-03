@@ -9,7 +9,6 @@ public class ProductsPage extends BasePage {
             "//div[text()='%s']//ancestor::div[@class='inventory_item']" +
                     "//child::button[text()='Add to cart']";
     private final By pageTitle = By.cssSelector(DATA_TEST_PATTERN.formatted("title"));
-
     private final By addToCartBtn = By.xpath("//*[text()='Add to cart']");
     private final By removeCartBtn = By.xpath("//*[text()='Remove']");
 
@@ -22,7 +21,7 @@ public class ProductsPage extends BasePage {
         return driver.findElement(pageTitle).isDisplayed();
     }
 
-    @Step("Получение заголовка страницы")
+    @Step("Получение заголовка страницы для проверки перехода на страницу Products")
     public String getTitle() {
         return driver.findElement(pageTitle).getText();
     }

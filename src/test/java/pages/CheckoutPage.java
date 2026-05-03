@@ -27,21 +27,21 @@ public class CheckoutPage extends BasePage {
     }
 
     @Step("Ввод в поле First Name")
-    public void fillFirstName(String value) {
+    public void fillFirstName(String name) {
         driver.findElement(firstName).clear();
-        driver.findElement(firstName).sendKeys(value);
+        driver.findElement(firstName).sendKeys(name);
     }
 
     @Step("Ввод в поле Last Name")
-    public void fillLastName(String value) {
+    public void fillLastName(String surname) {
         driver.findElement(lastName).clear();
-        driver.findElement(lastName).sendKeys(value);
+        driver.findElement(lastName).sendKeys(surname);
     }
 
     @Step("Ввод в поле Postal Code")
-    public void fillPostalCode(String value) {
+    public void fillPostalCode(String zip) {
         driver.findElement(postalCode).clear();
-        driver.findElement(postalCode).sendKeys(value);
+        driver.findElement(postalCode).sendKeys(zip);
     }
 
     @Step("Нажатие кнопки Continue")

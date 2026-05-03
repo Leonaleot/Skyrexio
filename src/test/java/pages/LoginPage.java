@@ -16,21 +16,20 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Открытие сайта")
-    public void open() {
+    public LoginPage open() {
         driver.get(BASE_URL);
+        return this;
     }
 
     @Step("Аутентификация с использованием учетных данных пользователя")
-    public void login(User user) {
-
+    public LoginPage login(User user) {
         driver.findElement(userField).sendKeys(user.getLogin());
-
         driver.findElement(passwordField).sendKeys(user.getPassword());
-
         driver.findElement(submitButton).click();
+        return this;
     }
 
-    @Step("Проверка появления сообщения об ошибки")
+    @Step("Проверка появления сообщения об ошибке")
     public boolean isErrorMsgDisplayed() {
         return driver.findElement(errorMsg).isDisplayed();
     }

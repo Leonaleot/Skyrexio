@@ -19,17 +19,17 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
-    @Step("Отображение заголовка страницы")
+    @Step("Отображение заголовка страницы YourCart")
     public boolean pageTitleDisplayed() {
         return driver.findElement(pageTitle).isDisplayed();
     }
 
-    @Step("Получение заголовка страницы")
+    @Step("Получение заголовка страницы YourCart")
     public String getTitle() {
         return driver.findElement(pageTitle).getText();
     }
 
-    @Step("Получение списка продуктов")
+    @Step("Получение списка продуктов в корзине")
     public ArrayList<String> getProductNames() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(continueShopBtn));
         List<WebElement> allProducts = driver.findElements(product);
