@@ -14,14 +14,17 @@ public class NavigationPanel {
     public NavigationPanel(WebDriver driver) {
         this.driver = driver;
     }
+
     @Step("Отображение количества товаров на иконке Корзина")
     public String checkCounterValue() {
         return driver.findElement(cartBadge).getText();
     }
+
     @Step("Отображение цвета фона ярлыка с количеством товаров на иконке Корзина")
     public String checkCounterColor() {
         return driver.findElement(cartBadge).getCssValue("background-color");
     }
+
     @Step("Открытие корзины")
     public void openCart() {
         driver.findElement(cartLink).click();

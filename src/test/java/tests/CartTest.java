@@ -1,7 +1,5 @@
 package tests;
 
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -23,16 +21,13 @@ public class CartTest extends BaseTest {
     @Test
     public void checkGoodsInCart() {
         SoftAssert soft = new SoftAssert();
-
         loginPage.open();
         loginPage.login(withAdminPermission());
         productsPage.addToCart(goodsName);
         productsPage.navigationPanel.openCart();
-
         soft.assertEquals(cartPage.getProductNames().size(), 1);
         soft.assertFalse(cartPage.getProductNames().isEmpty());
         soft.assertTrue(cartPage.getProductNames().contains(goodsName));
-
         soft.assertAll();
     }
 }

@@ -11,9 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import pages.CartPage;
-import pages.LoginPage;
-import pages.ProductsPage;
+import pages.*;
 
 import java.time.Duration;
 
@@ -22,6 +20,9 @@ public class BaseTest {
     LoginPage loginPage;
     ProductsPage productsPage;
     CartPage cartPage;
+    CheckoutPage checkoutPage;
+    OverviewPage overviewPage;
+    CompletePage completePage;
 
     @Parameters({"browser"})
     @BeforeMethod
@@ -45,8 +46,12 @@ public class BaseTest {
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
+        checkoutPage = new CheckoutPage(driver);
+        overviewPage = new OverviewPage(driver);
+        completePage = new CompletePage(driver);
     }
-@Step("Закрытие браузера")
+
+    @Step("Закрытие браузера")
     @AfterMethod
     public void close() {
         driver.quit();

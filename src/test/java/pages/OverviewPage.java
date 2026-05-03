@@ -9,13 +9,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartPage extends BasePage {
+public class OverviewPage extends BasePage {
     private final By pageTitle = By.cssSelector(DATA_TEST_PATTERN.formatted("title"));
     private final By product = By.cssSelector(".inventory_item_name");
-    private final By continueShopBtn = By.id("continue-shopping");
-    private final By checkoutBtn = By.cssSelector(DATA_TEST_PATTERN.formatted("checkout"));
+    private final By cancelBtn = By.id("cancel");
+    private final By finishBtn = By.id("finish");
 
-    public CartPage(WebDriver driver) {
+    public OverviewPage(WebDriver driver) {
         super(driver);
     }
 
@@ -31,7 +31,7 @@ public class CartPage extends BasePage {
 
     @Step("Получение списка продуктов")
     public ArrayList<String> getProductNames() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(continueShopBtn));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cancelBtn));
         List<WebElement> allProducts = driver.findElements(product);
         ArrayList<String> names = new ArrayList<>();
 
@@ -41,8 +41,8 @@ public class CartPage extends BasePage {
         return names;
     }
 
-    @Step("Нажатие кнопки Checkout")
-    public void openCheckout() {
-        driver.findElement(checkoutBtn).click();
+    @Step("Нажатие кнопки Finish")
+    public void clickFinish() {
+        driver.findElement(finishBtn).click();
     }
 }
