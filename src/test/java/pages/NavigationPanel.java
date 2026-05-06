@@ -26,7 +26,8 @@ public class NavigationPanel {
     }
 
     @Step("Открытие корзины")
-    public void openCart() {
+    public CartPage openCart() {
         driver.findElement(cartLink).click();
+        return new CartPage(driver);
     }
 }

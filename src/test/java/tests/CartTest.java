@@ -3,6 +3,7 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import pages.CartPage;
 
 import static enums.TitleNaming.CART;
 import static org.testng.Assert.*;
@@ -20,10 +21,12 @@ public class CartTest extends BaseTest {
     @TmsLink("Saucedemoo")
     @Issue("Saucedemoo")
     public void checkCart() {
-        loginPage.open();
-        loginPage.login(withAdminPermission());
+        CartPage cartPage = loginPage
+                .open()
+                .login(withAdminPermission())
+                .navigationPanel
+                .openCart();
         assertTrue(cartPage.pageTitleDisplayed());
-        productsPage.navigationPanel.openCart();
         assertEquals(cartPage.getTitle(), CART.getDisplayName());
     }
 
@@ -34,11 +37,12 @@ public class CartTest extends BaseTest {
     @Issue("Saucedemoo")
     public void checkGoodsInCart() {
         SoftAssert soft = new SoftAssert();
-        loginPage
+        CartPage cartPage = loginPage
                 .open()
-                .login(withAdminPermission());
-        productsPage.addToCart(goodsName);
-        productsPage.navigationPanel.openCart();
+                .login(withAdminPermission())
+                .addToCart(goodsName)
+                .navigationPanel
+                .openCart();
 
         soft.assertFalse(cartPage.getProductNames().isEmpty());
         Allure.step("Корзина не пуста");

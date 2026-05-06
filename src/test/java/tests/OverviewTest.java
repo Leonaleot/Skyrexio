@@ -3,6 +3,9 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import pages.CompletePage;
+import pages.OverviewPage;
+import pages.ProductsPage;
 
 import java.util.List;
 
@@ -25,13 +28,16 @@ public class OverviewTest extends BaseTest {
     @Issue("Saucedemoo")
     public void checkGoodsInOverview() {
         SoftAssert soft = new SoftAssert();
-        loginPage.open();
-        loginPage.login(withAdminPermission());
+        ProductsPage productsPage = loginPage
+                .open()
+                .login(withAdminPermission());
         goodsNames.forEach(productsPage::addToCart);
-        productsPage.navigationPanel.openCart();
-        cartPage.openCheckout();
-        checkoutPage.fillForm("John", "Smith", "2435");
-        checkoutPage.clickContinue();
+        OverviewPage overviewPage = productsPage
+                .navigationPanel
+                .openCart()
+                .openCheckout()
+                .fillForm("John", "Smith", "2435")
+                .clickContinueSuccess();
         soft.assertFalse(overviewPage.getProductNames().isEmpty());
         Allure.step("Список заказа не пуст");
         soft.assertEquals(overviewPage.getProductNames().size(), 2);
@@ -47,17 +53,19 @@ public class OverviewTest extends BaseTest {
     @TmsLink("Saucedemoo")
     @Issue("Saucedemoo")
     public void CompleteOrder() {
-        loginPage
+        ProductsPage productsPage = loginPage
                 .open()
                 .login(withAdminPermission());
         goodsNames.forEach(productsPage::addToCart);
-        productsPage.navigationPanel.openCart();
-        cartPage.openCheckout();
-        checkoutPage.fillForm("John", "Smith", "2435");
-        checkoutPage.clickContinue();
-        overviewPage.clickFinish();
+        OverviewPage overviewPage = productsPage
+                .navigationPanel
+                .openCart()
+                .openCheckout()
+                .fillForm("John", "Smith", "2435")
+                .clickContinueSuccess();
+        CompletePage completePage = overviewPage
+        .clickFinish();
         assertTrue(completePage.pageTitleDisplayed());
         assertEquals(completePage.getTitle(), COMPLETE.getDisplayName());
     }
-
 }

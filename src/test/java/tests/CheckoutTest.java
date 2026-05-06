@@ -3,6 +3,8 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.CheckoutPage;
+import pages.OverviewPage;
 
 import static enums.TitleNaming.CHECKOUT;
 import static enums.TitleNaming.OVERVIEW;
@@ -21,12 +23,13 @@ public class CheckoutTest extends BaseTest {
     @TmsLink("Saucedemoo")
     @Issue("Saucedemoo")
     public void checkCheckout() {
-        loginPage
+        CheckoutPage checkoutPage = loginPage
                 .open()
-                .login(withAdminPermission());
-        productsPage.addToCart(goodsName);
-        productsPage.navigationPanel.openCart();
-        cartPage.openCheckout();
+                .login(withAdminPermission())
+                .addToCart(goodsName)
+                .navigationPanel
+                .openCart()
+                .openCheckout();
         assertTrue(checkoutPage.pageTitleDisplayed());
         assertEquals(checkoutPage.getTitle(), CHECKOUT.getDisplayName());
     }
@@ -37,14 +40,15 @@ public class CheckoutTest extends BaseTest {
     @TmsLink("Saucedemoo")
     @Issue("Saucedemoo")
     public void checkCorrectCheckout() {
-        loginPage
+        OverviewPage overviewPage = loginPage
                 .open()
-                .login(withAdminPermission());
-        productsPage.addToCart(goodsName);
-        productsPage.navigationPanel.openCart();
-        cartPage.openCheckout();
-        checkoutPage.fillForm("John", "Smith", "2435");
-        checkoutPage.clickContinue();
+                .login(withAdminPermission())
+                .addToCart(goodsName)
+                .navigationPanel
+                .openCart()
+                .openCheckout()
+                .fillForm("John", "Smith", "2435")
+                .clickContinueSuccess();
         assertTrue(overviewPage.pageTitleDisplayed());
         assertEquals(overviewPage.getTitle(), OVERVIEW.getDisplayName());
     }
@@ -57,14 +61,15 @@ public class CheckoutTest extends BaseTest {
 
     public void invalidCheckoutTest(String firstName, String lastName, String postalCode, String errorMessage, String story) {
         Allure.label("story", story);
-        loginPage
+        CheckoutPage checkoutPage = loginPage
                 .open()
-                .login(withAdminPermission());
-        productsPage.addToCart(goodsName);
-        productsPage.navigationPanel.openCart();
-        cartPage.openCheckout();
-        checkoutPage.fillForm(firstName, lastName, postalCode);
-        checkoutPage.clickContinue();
+                .login(withAdminPermission())
+                .addToCart(goodsName)
+                .navigationPanel
+                .openCart()
+                .openCheckout()
+                .fillForm(firstName, lastName, postalCode)
+                .clickContinue();
         assertTrue(checkoutPage.isErrorMsgDisplayed(), "The error message fails to appear");
         assertEquals(checkoutPage.getErrorMessage(), errorMessage, "Error message doesn't correspond");
     }

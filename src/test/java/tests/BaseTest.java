@@ -19,11 +19,6 @@ import java.time.Duration;
 public class BaseTest {
     public WebDriver driver;
     LoginPage loginPage;
-    ProductsPage productsPage;
-    CartPage cartPage;
-    CheckoutPage checkoutPage;
-    OverviewPage overviewPage;
-    CompletePage completePage;
 
     @Parameters({"browser"})
     @BeforeMethod
@@ -46,11 +41,6 @@ public class BaseTest {
         }
         context.setAttribute("driver", driver);
         loginPage = new LoginPage(driver);
-        productsPage = new ProductsPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutPage = new CheckoutPage(driver);
-        overviewPage = new OverviewPage(driver);
-        completePage = new CompletePage(driver);
     }
 
     @Step("Закрытие браузера")

@@ -27,15 +27,16 @@ public class ProductsPage extends BasePage {
     }
 
     @Step("Добавление товара в корзину с помощью локатора с индексом")
-    public void addToCart() {
+    public ProductsPage addToCart() {
         driver.findElements(addToCartBtn).get(0).click();
+        return this;
     }
 
     @Step("Добавление товара в корзину с помощью уникального локатора")
-    public void addToCart(final String goodsName) {
+    public ProductsPage addToCart(final String goodsName) {
         By addToCart = By.xpath(ADD_TO_CART_PATTERN.formatted(goodsName));
-
         driver.findElement(addToCart).click();
+        return this;
     }
 
     @Step("Получение цвета обводки кнопки Remove")

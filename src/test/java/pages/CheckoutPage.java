@@ -44,15 +44,24 @@ public class CheckoutPage extends BasePage {
         driver.findElement(postalCode).sendKeys(zip);
     }
 
-    @Step("Нажатие кнопки Continue")
-    public void clickContinue() {
+    @Step("Нажатие кнопки Continue при корректном вводе полей")
+    public OverviewPage clickContinueSuccess() {
         driver.findElement(continueBtn).click();
+        return new OverviewPage(driver);
     }
 
-    public void fillForm(String first, String last, String zip) {
+    @Step("Нажатие кнопки Continue при некорректном вводе полей")
+    public CheckoutPage clickContinue() {
+        driver.findElement(continueBtn).click();
+        return this;
+    }
+
+
+    public CheckoutPage fillForm(String first, String last, String zip) {
         fillFirstName(first);
         fillLastName(last);
         fillPostalCode(zip);
+        return this;
     }
 
     @Step("Проверка появления сообщения об ошибки")

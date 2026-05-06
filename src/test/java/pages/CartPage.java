@@ -42,7 +42,8 @@ public class CartPage extends BasePage {
     }
 
     @Step("Нажатие кнопки Checkout")
-    public void openCheckout() {
+    public CheckoutPage openCheckout() {
         driver.findElement(checkoutBtn).click();
+        return new CheckoutPage(driver);
     }
 }

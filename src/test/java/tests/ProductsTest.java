@@ -3,6 +3,7 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import pages.ProductsPage;
 
 import java.util.List;
 
@@ -25,13 +26,14 @@ public class ProductsTest extends BaseTest {
     @Issue("Saucedemoo")
     public void checkGoodsAdded() {
         SoftAssert soft = new SoftAssert();
-        loginPage
+        ProductsPage productsPage = loginPage
                 .open()
                 .login(withAdminPermission());
         assertTrue(productsPage.pageTitleDisplayed());
-        productsPage.addToCart();
-        productsPage.addToCart("Sauce Labs Onesie");
-        productsPage.addToCart("Test.allTheThings() T-Shirt (Red)");
+        productsPage
+                .addToCart()
+                .addToCart("Sauce Labs Onesie")
+                .addToCart("Test.allTheThings() T-Shirt (Red)");
 
         for (String goods : goodsList) {
             productsPage.addToCart(goods);
@@ -41,7 +43,7 @@ public class ProductsTest extends BaseTest {
         soft.assertEquals(productsPage.checkRemoveBtnBorder(), "1px solid rgb(226, 35, 26)");
         Allure.step("Соответствие цвета Border кнопки Remove");
         soft.assertEquals(productsPage.navigationPanel.checkCounterValue(), "6");
-        Allure.step("На бейдже Корзины поялвился ярлычок с соответствующим числом добавленных товаров");
+        Allure.step("На бейдже Корзины появился ярлычок с соответствующим числом добавленных товаров");
         soft.assertEquals(productsPage.navigationPanel.checkCounterColor(), "rgba(226, 35, 26, 1)");
         Allure.step("Соответствие цвета бейджа на корзине");
         soft.assertAll();

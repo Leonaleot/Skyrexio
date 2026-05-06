@@ -22,11 +22,11 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Аутентификация с использованием учетных данных пользователя")
-    public LoginPage login(User user) {
+    public ProductsPage login(User user) {
         driver.findElement(userField).sendKeys(user.getLogin());
         driver.findElement(passwordField).sendKeys(user.getPassword());
         driver.findElement(submitButton).click();
-        return this;
+        return new ProductsPage(driver);
     }
 
     @Step("Проверка появления сообщения об ошибке")

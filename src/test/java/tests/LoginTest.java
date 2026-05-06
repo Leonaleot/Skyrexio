@@ -3,6 +3,7 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.ProductsPage;
 import user.User;
 
 import static enums.TitleNaming.PRODUCTS;
@@ -20,7 +21,7 @@ public class LoginTest extends BaseTest {
     @TmsLink("Saucedemoo")
     @Issue("Saucedemoo")
     public void checkLogin() {
-        loginPage
+        ProductsPage productsPage = loginPage
                 .open()
                 .login(withAdminPermission());
         assertEquals(productsPage.getTitle(), PRODUCTS.getDisplayName());
