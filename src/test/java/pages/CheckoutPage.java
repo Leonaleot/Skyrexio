@@ -56,7 +56,6 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
-
     public CheckoutPage fillForm(String first, String last, String zip) {
         fillFirstName(first);
         fillLastName(last);
