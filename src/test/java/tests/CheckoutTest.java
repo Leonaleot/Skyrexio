@@ -58,7 +58,6 @@ public class CheckoutTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @TmsLink("Saucedemoo")
     @Issue("Saucedemoo")
-
     public void invalidCheckoutTest(String firstName, String lastName, String postalCode, String errorMessage, String story) {
         Allure.label("story", story);
         CheckoutPage checkoutPage = loginPage

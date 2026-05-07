@@ -3,6 +3,7 @@ package pages;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class CheckoutPage extends BasePage {
     private final By pageTitle = By.cssSelector(DATA_TEST_PATTERN.formatted("title"));
@@ -27,21 +28,27 @@ public class CheckoutPage extends BasePage {
     }
 
     @Step("Ввод в поле First Name")
-    public void fillFirstName(String name) {
-        driver.findElement(firstName).clear();
-        driver.findElement(firstName).sendKeys(name);
+    public CheckoutPage fillFirstName(String name) {
+        WebElement firstNameInput = driver.findElement(firstName);
+        firstNameInput.clear();
+        firstNameInput.sendKeys(name);
+        return this;
     }
 
     @Step("Ввод в поле Last Name")
-    public void fillLastName(String surname) {
-        driver.findElement(lastName).clear();
-        driver.findElement(lastName).sendKeys(surname);
+    public CheckoutPage fillLastName(String surname) {
+        WebElement lastNameInput = driver.findElement(lastName);
+        lastNameInput.clear();
+        lastNameInput.sendKeys(surname);
+        return this;
     }
 
     @Step("Ввод в поле Postal Code")
-    public void fillPostalCode(String zip) {
-        driver.findElement(postalCode).clear();
-        driver.findElement(postalCode).sendKeys(zip);
+    public CheckoutPage fillPostalCode(String zip) {
+        WebElement postalCodeInput = driver.findElement(postalCode);
+        postalCodeInput.clear();
+        postalCodeInput.sendKeys(zip);
+        return this;
     }
 
     @Step("Нажатие кнопки Continue при корректном вводе полей")
@@ -57,18 +64,17 @@ public class CheckoutPage extends BasePage {
     }
 
     public CheckoutPage fillForm(String first, String last, String zip) {
-        fillFirstName(first);
-        fillLastName(last);
-        fillPostalCode(zip);
-        return this;
+        return fillFirstName(first)
+                .fillLastName(last)
+                .fillPostalCode(zip);
     }
 
-    @Step("Проверка появления сообщения об ошибки")
+    @Step("Проверка появления сообщения об ошибке")
     public boolean isErrorMsgDisplayed() {
         return driver.findElement(errorMsg).isDisplayed();
     }
 
-    @Step("Получение сообщения об ошибки")
+    @Step("Получение сообщения об ошибке")
     public String getErrorMessage() {
         return driver.findElement(errorMsg).getText();
     }
