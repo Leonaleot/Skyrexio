@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -8,7 +9,6 @@ public class ProductsPage extends BasePage {
             "//div[text()='%s']//ancestor::div[@class='inventory_item']" +
                     "//child::button[text()='Add to cart']";
     private final By pageTitle = By.cssSelector(DATA_TEST_PATTERN.formatted("title"));
-
     private final By addToCartBtn = By.xpath("//*[text()='Add to cart']");
     private final By removeCartBtn = By.xpath("//*[text()='Remove']");
 
@@ -16,28 +16,35 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
+    @Step("Отображение заголовка страницы")
     public boolean pageTitleDisplayed() {
         return driver.findElement(pageTitle).isDisplayed();
     }
 
+    @Step("Получение заголовка страницы для проверки перехода на страницу Products")
     public String getTitle() {
         return driver.findElement(pageTitle).getText();
     }
 
-    public void addToCart() {
+    @Step("Добавление товара в корзину с помощью локатора с индексом")
+    public ProductsPage addToCart() {
         driver.findElements(addToCartBtn).get(0).click();
+        return this;
     }
 
-    public void addToCart(final String goodsName) {
+    @Step("Добавление товара в корзину с помощью уникального локатора")
+    public ProductsPage addToCart(final String goodsName) {
         By addToCart = By.xpath(ADD_TO_CART_PATTERN.formatted(goodsName));
-
         driver.findElement(addToCart).click();
+        return this;
     }
 
+    @Step("Получение цвета обводки кнопки Remove")
     public String checkRemoveBtnBorder() {
         return driver.findElement(removeCartBtn).getCssValue("border");
     }
 
+    @Step("Получение текста кнопки Remove")
     public String checkRemoveBtn() {
         return driver.findElement(removeCartBtn).getText();
     }

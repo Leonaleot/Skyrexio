@@ -9,29 +9,29 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartPage extends BasePage {
+public class OverviewPage extends BasePage {
     private final By pageTitle = By.cssSelector(DATA_TEST_PATTERN.formatted("title"));
     private final By product = By.cssSelector(".inventory_item_name");
-    private final By continueShopBtn = By.id("continue-shopping");
-    private final By checkoutBtn = By.cssSelector(DATA_TEST_PATTERN.formatted("checkout"));
+    private final By cancelBtn = By.id("cancel");
+    private final By finishBtn = By.id("finish");
 
-    public CartPage(WebDriver driver) {
+    public OverviewPage(WebDriver driver) {
         super(driver);
     }
 
-    @Step("Отображение заголовка страницы YourCart")
+    @Step("Отображение заголовка страницы")
     public boolean pageTitleDisplayed() {
         return driver.findElement(pageTitle).isDisplayed();
     }
 
-    @Step("Получение заголовка страницы YourCart")
+    @Step("Получение заголовка страницы")
     public String getTitle() {
         return driver.findElement(pageTitle).getText();
     }
 
-    @Step("Получение списка продуктов в корзине")
+    @Step("Получение списка продуктов")
     public ArrayList<String> getProductNames() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(continueShopBtn));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cancelBtn));
         List<WebElement> allProducts = driver.findElements(product);
         ArrayList<String> names = new ArrayList<>();
 
@@ -41,9 +41,9 @@ public class CartPage extends BasePage {
         return names;
     }
 
-    @Step("Нажатие кнопки Checkout")
-    public CheckoutPage openCheckout() {
-        driver.findElement(checkoutBtn).click();
-        return new CheckoutPage(driver);
+    @Step("Нажатие кнопки Finish")
+    public CompletePage clickFinish() {
+        driver.findElement(finishBtn).click();
+        return new CompletePage(driver);
     }
 }
